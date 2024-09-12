@@ -113,6 +113,10 @@ p {
   margin: 16px;
 }
 
+.email-field {
+  text-transform: none; /* Empêche la transformation automatique en majuscules */
+}
+
 .Pagination {
   a {
     color: white;
@@ -179,6 +183,7 @@ footer {
   font-family: "Manrope", sans-serif;
   padding: 32px;
   width: 600px;
+  background-color: #37008026;
   display: flex;
   justify-content: center;
   flex-direction: column;
