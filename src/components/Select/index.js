@@ -16,7 +16,6 @@ const Select = ({
   const [value, setValue] = useState();
   const [collapsed, setCollapsed] = useState(true);
   const changeValue = (newValue) => {
-    console.log("Changing value to:", newValue);
     onChange(newValue); // Passez newValue à la fonction de rappel
     setValue(newValue);
     setCollapsed(true); // Rétracte le menu après sélection
