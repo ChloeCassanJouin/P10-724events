@@ -38,13 +38,23 @@ const Form = ({ onSuccess, onError }) => {
     });
   };
 
+  // Fonction pour valider le format de l'email
+  const isValidEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
   // Fonction pour valider les champs
   const validate = () => {
     const newErrors = {};
 
     if (!formData.nom) newErrors.nom = 'Le nom est requis.';
     if (!formData.prenom) newErrors.prenom = 'Le prénom est requis.';
-    if (!formData.email) newErrors.email = 'L\'email est requis.';
+    if (!formData.email) {
+      newErrors.email = 'L\'email est requis.';
+    } else if (!isValidEmail(formData.email)) {
+      newErrors.email = 'L\'email est invalide.';
+    }
     if (!formData.message) newErrors.message = 'Le message est requis.';
 
     return newErrors;
