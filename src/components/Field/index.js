@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+
 import "./style.scss";
 
 export const FIELD_TYPES = {

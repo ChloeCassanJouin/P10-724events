@@ -1,11 +1,18 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
+
 import "./style.scss";
 
-const Select = ({ selection, onChange, name, titleEmpty, label, type = "normal" }) => {
+const Select = ({ 
+  selection, 
+  onChange, 
+  name, 
+  titleEmpty, 
+  label, 
+  type = "normal" 
+}) => {
   const [value, setValue] = useState("");
   const [collapsed, setCollapsed] = useState(true);
-
   const changeValue = (newValue) => {
     setValue(newValue);
     setCollapsed(true);
