@@ -1,11 +1,11 @@
-/* eslint-disable react/self-closing-comp */
+/* eslint-disable react/self-closing-comp */ 
 /* eslint-disable react/button-has-type */
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import { fireEvent, render, screen } from "@testing-library/react";
 import Modal from "./index";
 
 describe("When Modal data is created", () => {
-  it("a modal content is display", () => {
+  it("a modal content is displayed", () => {
     render(
       <Modal opened Content={<div>modal content</div>}>
         {() => null}
@@ -13,6 +13,7 @@ describe("When Modal data is created", () => {
     );
     expect(screen.getByText("modal content")).toBeInTheDocument();
   });
+
   describe("and a click is triggered to display the modal", () => {
     it("the content of modal is displayed", async () => {
       render(
@@ -28,12 +29,12 @@ describe("When Modal data is created", () => {
           bubbles: true,
         })
       );
-
+      expect(screen.getByText("modal content")).toBeInTheDocument();
     });
   });
 
   describe("and a click is triggered to the close button modal", () => {
-    it("the content of the modal is hide", async () => {
+    it("the content of the modal is hidden", async () => {
       render(
         <Modal opened Content={<div>modal content</div>}>
           {() => null}
@@ -48,7 +49,32 @@ describe("When Modal data is created", () => {
           bubbles: true,
         })
       );
+      expect(screen.queryByText("modal content")).not.toBeInTheDocument();
+    });
+  });
 
+  // Nouveau test pour la fermeture de la modale après un clic à l'extérieur
+  describe("and a click is triggered outside the modal", () => {
+    it("the modal is closed", async () => {
+      render(
+        <Modal opened Content={<div>modal content</div>}>
+          {() => <div data-testid="modal-overlay" />}
+        </Modal>
+      );
+
+      // Le contenu de la modale est affiché
+      expect(screen.getByText("modal content")).toBeInTheDocument();
+
+      // Simule un clic à l'extérieur de la modale (dans l'overlay)
+      fireEvent(
+        screen.getByTestId("modal-overlay"),
+        new MouseEvent("click", {
+          cancelable: true,
+          bubbles: true,
+        })
+      );
+
+      // Le contenu de la modale ne doit plus être visible
       expect(screen.queryByText("modal content")).not.toBeInTheDocument();
     });
   });
