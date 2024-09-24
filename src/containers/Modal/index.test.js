@@ -53,7 +53,7 @@ describe("When Modal data is created", () => {
     });
   });
 
-  // Nouveau test pour la fermeture de la modale après un clic à l'extérieur
+  // Nouveau test pour fermeture modale après clic à l'extérieur
   describe("and a click is triggered outside the modal", () => {
     it("the modal is closed", async () => {
       render(
@@ -62,10 +62,8 @@ describe("When Modal data is created", () => {
         </Modal>
       );
 
-      // Le contenu de la modale est affiché
       expect(screen.getByText("modal content")).toBeInTheDocument();
 
-      // Simule un clic à l'extérieur de la modale (dans l'overlay)
       fireEvent(
         screen.getByTestId("modal-overlay"),
         new MouseEvent("click", {
@@ -74,7 +72,6 @@ describe("When Modal data is created", () => {
         })
       );
 
-      // Le contenu de la modale ne doit plus être visible
       expect(screen.queryByText("modal content")).not.toBeInTheDocument();
     });
   });
