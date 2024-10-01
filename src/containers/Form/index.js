@@ -12,8 +12,6 @@ const mockContactApi = () =>
 
 const Form = ({ onSuccess, onError }) => {
   const [sending, setSending] = useState(false);
-
-  // État pour les valeurs du formulaire
   const [formData, setFormData] = useState({
     nom: '',
     prenom: '',
@@ -21,11 +19,8 @@ const Form = ({ onSuccess, onError }) => {
     email: '',
     message: ''
   });
-
-  // État pour les erreurs de validation
   const [errors, setErrors] = useState({});
 
-  // Fonction pour mettre à jour les champs
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -34,20 +29,17 @@ const Form = ({ onSuccess, onError }) => {
     });
     setErrors({
       ...errors,
-      [name]: '' // Réinitialiser l'erreur lorsque l'utilisateur modifie le champ
+      [name]: ''
     });
   };
 
-  // Fonction pour valider le format de l'email
   const isValidEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   };
 
-  // Fonction pour valider les champs
   const validate = () => {
     const newErrors = {};
-
     if (!formData.nom) newErrors.nom = 'Le nom est requis.';
     if (!formData.prenom) newErrors.prenom = 'Le prénom est requis.';
     if (!formData.email) {
@@ -56,18 +48,13 @@ const Form = ({ onSuccess, onError }) => {
       newErrors.email = 'L\'email est invalide.';
     }
     if (!formData.message) newErrors.message = 'Le message est requis.';
-
     return newErrors;
   };
 
-  // Fonction pour gérer l'envoi du formulaire
   const sendContact = useCallback(
     async (evt) => {
       evt.preventDefault();
-      
       const validationErrors = validate();
-
-      // Si des erreurs existent, on les affiche et on ne soumet pas le formulaire
       if (Object.keys(validationErrors).length > 0) {
         setErrors(validationErrors);
         return;
@@ -84,7 +71,7 @@ const Form = ({ onSuccess, onError }) => {
           email: '',
           message: ''
         });
-        onSuccess(); // Affichage de la modale en cas de succès
+        onSuccess();
       } catch (err) {
         setSending(false);
         onError(err);
@@ -93,27 +80,34 @@ const Form = ({ onSuccess, onError }) => {
     [formData, onSuccess, onError]
   );
 
+
   return (
     <form onSubmit={sendContact}>
       <div className="row">
         <div className="col">
-          <Field
-            name="nom"
-            placeholder=""
-            label="Nom"
-            value={formData.nom}
-            onChange={handleChange}
-          />
-          {errors.nom && <div className="error">{errors.nom}</div>} {/* Message d'erreur */}
+          <div className="inputField">
+            <span>Nom</span>
+            <input
+              data-testid="field-testid-nom" // Assurez-vous que ceci est unique
+              name="nom"
+              type="text"
+              value={formData.nom}
+              onChange={handleChange}
+            />
+            {errors.nom && <div className="error">{errors.nom}</div>}
+          </div>
 
-          <Field
-            name="prenom"
-            placeholder=""
-            label="Prénom"
-            value={formData.prenom}
-            onChange={handleChange}
-          />
-          {errors.prenom && <div className="error">{errors.prenom}</div>} {/* Message d'erreur */}
+          <div className="inputField">
+            <span>Prénom</span>
+            <input
+              data-testid="field-testid-prenom" // Assurez-vous que ceci est unique
+              name="prenom"
+              type="text"
+              value={formData.prenom}
+              onChange={handleChange}
+            />
+            {errors.prenom && <div className="error">{errors.prenom}</div>}
+          </div>
 
           <Select
             name="type"
@@ -123,32 +117,41 @@ const Form = ({ onSuccess, onError }) => {
             type="large"
             titleEmpty
             value={formData.type}
+            data-testid="select-testid" // Unique data-testid
           />
 
-          <Field
-            name="email"
-            className="email-field"
-            placeholder=""
-            label="Email"
-            value={formData.email}
-            onChange={handleChange}
-          />
-          {errors.email && <div className="error">{errors.email}</div>} {/* Message d'erreur */}
+          <div className="inputField">
+            <span>Email</span>
+            <input
+              className="email-field"
+              data-testid="field-testid-email" // Assurez-vous que ceci est unique
+              name="email"
+              type="text"
+              value={formData.email}
+              onChange={handleChange}
+            />
+            {errors.email && <div className="error">{errors.email}</div>}
+          </div>
 
-          <Button type={BUTTON_TYPES.SUBMIT} disabled={sending}>
+          <Button type={BUTTON_TYPES.SUBMIT} disabled={sending} data-testid="button-test-id">
             {sending ? "En cours" : "Envoyer"}
           </Button>
         </div>
+        
         <div className="col">
-          <Field
-            name="message"
-            placeholder="message"
-            label="Message"
-            type={FIELD_TYPES.TEXTAREA}
-            value={formData.message}
-            onChange={handleChange}
-          />
-          {errors.message && <div className="error">{errors.message}</div>} {/* Message d'erreur */}
+          <div className="inputField">
+            <span>Message</span>
+            <Field
+              name="message"
+              placeholder="message"
+              label="Message"
+              type={FIELD_TYPES.TEXTAREA}
+              value={formData.message}
+              onChange={handleChange}
+              data-testid="field-testid-message"
+            />
+            {errors.message && <div className="error">{errors.message}</div>}
+          </div>
         </div>
       </div>
     </form>
