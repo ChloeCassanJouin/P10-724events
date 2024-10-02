@@ -19,11 +19,11 @@ describe("When Events is created", () => {
       fireEvent.change(screen.getByTestId("field-testid-nom"), { target: { value: "Doe" } });
       fireEvent.change(screen.getByTestId("field-testid-prenom"), { target: { value: "John" } });
       fireEvent.change(screen.getByTestId("field-testid-email"), { target: { value: "john.doe@example.com" } });
-      /* code initial 01/10!!! (screen.getByPlaceholderText("field-testid-message"), { target: { value: "Ceci est un message." } });*/
+
       fireEvent.change(screen.getByTestId("field-testid-message"), { target: { value: "Ceci est un message." } });
+      expect(screen.getByTestId("field-testid-message").value).toBe("Ceci est un message.");
 
       // Simuler le clic sur le bouton de soumission
-      /* code initial 01/10!!!!fireEvent.click(screen.getByTestId("button-test-id"));*/
       fireEvent(
         await screen.findByTestId("button-test-id"),
         new MouseEvent("click", {
