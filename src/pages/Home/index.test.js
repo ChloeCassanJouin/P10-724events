@@ -29,16 +29,40 @@ describe("When Form is created", () => {
 
 
 describe("When a page is created", () => {
-  it("a list of events is displayed", () => {
-    // to implement
-  })
-  it("a list a people is displayed", () => {
-    // to implement
-  })
-  it("a footer is displayed", () => {
-    // to implement
-  })
+  it("a list of events is displayed", async () => {
+    render(<Home />);
+
+    const eventTitles = await screen.findAllByText("Nos réalisations");
+
+    const eventTitle = eventTitles[0]; 
+
+    expect(eventTitle).toBeInTheDocument();
+  });
+
+
+  it("a list of people is displayed", async () => {
+    render(<Home />);
+  
+    const personCard = await screen.findByText("Samira");
+    expect(personCard).toBeInTheDocument();
+  
+    await screen.findByText("Jean-baptiste");
+  });
+
+
+  it("a footer is displayed", async () => {
+    render(<Home />);
+  
+    const address = await screen.findByText("45 avenue de la République, 75000 Paris");
+    expect(address).toBeInTheDocument();
+
+    const phoneNumber = await screen.findByText("01 23 45 67 89");
+    expect(phoneNumber).toBeInTheDocument();
+  
+  });
+
+
   it("an event card, with the last event, is displayed", () => {
-    // to implement
+    // to implement , mocker des éléments
   })
 });
