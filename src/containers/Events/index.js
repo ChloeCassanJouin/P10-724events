@@ -14,12 +14,11 @@ const EventList = () => {
   const [type, setType] = useState();
   const [currentPage, setCurrentPage] = useState(1);
 
-  // Filtrer les événements par type, puis trier par date anti-chronologique
   const filteredAndSortedEvents = (
     (!type
       ? data?.events
       : data?.events.filter(event => event.type === type)) || []
-  ).sort((a, b) => new Date(b.date) - new Date(a.date)); // Tri anti-chronologique
+  ).sort((a, b) => new Date(b.date) - new Date(a.date)); 
 
   const paginatedEvents = filteredAndSortedEvents.filter((event, index) => {
     if (

@@ -65,9 +65,8 @@ describe("When a page is created", () => {
   it("an event card, with the last event, is displayed in the footer", async () => {
     render(<Home />);
   
-    // Cherche dans le footer un composant EventCard avec le label 'boom'
     const footer = document.querySelector("footer");
-    const eventCardFooter = within(footer).getByText("boom"); // Utilise 'boom' comme label
+    const eventCardFooter = within(footer).getByText("boom"); 
   
     expect(eventCardFooter).toBeInTheDocument();
   });

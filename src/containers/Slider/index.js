@@ -7,15 +7,14 @@ const Slider = () => {
   const { data } = useData();
   const [index, setIndex] = useState(0);
 
-  // Tri des événements par date décroissante
   const byDateDesc = data?.focus.sort((evtA, evtB) => new Date(evtB.date) - new Date(evtA.date)) || [];
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setIndex((prevIndex) => (prevIndex + 1) % byDateDesc.length); // Boucle après la dernière carte
+      setIndex((prevIndex) => (prevIndex + 1) % byDateDesc.length); 
     }, 5000);
 
-    return () => clearInterval(interval); // Nettoyage
+    return () => clearInterval(interval); 
   }, [byDateDesc]);
 
   return (
@@ -23,7 +22,7 @@ const Slider = () => {
       {byDateDesc.length > 0 ? (
         byDateDesc.map((event, idx) => (
           <div
-            key={event.id} // Utilisez un identifiant unique
+            key={event.id} 
             className={`SlideCard ${index === idx ? "SlideCard--display" : "SlideCard--hide"}`}
           >
             <img src={event.cover} alt={event.title} />
@@ -44,12 +43,12 @@ const Slider = () => {
         <div className="SlideCard__pagination">
           {byDateDesc.map((event, radioIdx) => (
             <input
-              key={event.id} // Utilisez un identifiant unique
+              key={event.id} 
               type="radio"
               name="radio-button"
               checked={index === radioIdx}
-              onChange={() => setIndex(radioIdx)} // Change l'index au clic
-              style={{ cursor: 'pointer' }} // Optionnel : change le curseur au survol
+              onChange={() => setIndex(radioIdx)} 
+              style={{ cursor: 'pointer' }} 
             />
           ))}
         </div>

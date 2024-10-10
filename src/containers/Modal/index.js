@@ -5,23 +5,23 @@ import "./style.scss";
 
 const Modal = ({ opened, Content, children }) => {
   const [isOpened, setIsOpened] = useState(opened);
-  const modalRef = useRef(null); // Référence pour le conteneur de la modale
+  const modalRef = useRef(null);
 
   const handleClickOutside = (event) => {
     if (modalRef.current && !modalRef.current.contains(event.target)) {
-      setIsOpened(false); // Ferme la modale si on clique à l'extérieur
+      setIsOpened(false); 
     }
   };
 
   useEffect(() => {
     if (isOpened) {
-      document.addEventListener("mousedown", handleClickOutside); // Écouteur pour les clics
+      document.addEventListener("mousedown", handleClickOutside); 
     } else {
-      document.removeEventListener("mousedown", handleClickOutside); // Nettoie l'écouteur
+      document.removeEventListener("mousedown", handleClickOutside); 
     }
 
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside); // Nettoyage de l'écouteur lors de la destruction du composant
+      document.removeEventListener("mousedown", handleClickOutside); 
     };
   }, [isOpened]);
 

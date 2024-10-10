@@ -17,23 +17,25 @@ const Field = ({ type = FIELD_TYPES.INPUT_TEXT, label, name, placeholder, classN
           name={name}
           placeholder={placeholder}
           className={className}
-          value={value} // Ajoutez la valeur ici
-          onChange={onChange} // Ajoutez le gestionnaire d'événements ici
+          value={value} 
+          onChange={onChange} 
           data-testid="field-testid"
         />
       );
       break;
+
     case FIELD_TYPES.TEXTAREA:
       component = (
         <textarea
           name={name}
           className={className}
-          value={value} // Ajoutez la valeur ici
-          onChange={onChange} // Ajoutez le gestionnaire d'événements ici
+          value={value} 
+          onChange={onChange} 
           data-testid="field-testid"
         />
       );
       break;
+
     default:
       component = (
         <input
@@ -41,8 +43,8 @@ const Field = ({ type = FIELD_TYPES.INPUT_TEXT, label, name, placeholder, classN
           name={name}
           placeholder={placeholder}
           className={className}
-          value={value} // Ajoutez la valeur ici
-          onChange={onChange} // Ajoutez le gestionnaire d'événements ici
+          value={value} 
+          onChange={onChange} 
           data-testid="field-testid"
         />
       );
@@ -61,8 +63,8 @@ Field.propTypes = {
   label: PropTypes.string,
   placeholder: PropTypes.string,
   className: PropTypes.string,
-  value: PropTypes.string, // Ajoutez la déclaration de type ici
-  onChange: PropTypes.func, // Ajoutez la déclaration de type ici
+  value: PropTypes.string, 
+  onChange: PropTypes.func, 
 };
 
 Field.defaultProps = {
@@ -71,8 +73,8 @@ Field.defaultProps = {
   type: FIELD_TYPES.INPUT_TEXT,
   name: "field-name",
   className: "",
-  value: "", // Valeur par défaut vide
-  onChange: () => {}, // Valeur par défaut fonction vide
+  value: "", 
+  onChange: () => {}, 
 };
 
 export default Field; 
