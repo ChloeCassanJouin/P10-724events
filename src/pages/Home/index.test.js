@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, within } from "@testing-library/react";
 import Home from "./index";
 
 describe("When Form is created", () => {
@@ -62,7 +62,13 @@ describe("When a page is created", () => {
   });
 
 
-  it("an event card, with the last event, is displayed", () => {
-    // to implement , mocker des éléments
-  })
+  it("an event card, with the last event, is displayed in the footer", async () => {
+    render(<Home />);
+  
+    // Cherche dans le footer un composant EventCard avec le label 'boom'
+    const footer = document.querySelector("footer");
+    const eventCardFooter = within(footer).getByText("boom"); // Utilise 'boom' comme label
+  
+    expect(eventCardFooter).toBeInTheDocument();
+  });
 });

@@ -13,23 +13,17 @@ import Modal from "../../containers/Modal";
 import { useData } from "../../contexts/DataContext";
 
 const Page = () => {
-  // const {last} = useData()  code Openclassrooms
     const { data } = useData();
-  
-  // Combine events and focus
-  const events = data?.events || [];
-  const focus = data?.focus || [];
-  
-  // Add a type property to distinguish between events and focus
-  const combined = [
-    ...events.map(event => ({ ...event, type: 'event' })),
-    ...focus.map(focusItem => ({ ...focusItem, type: 'focus' }))
+    const events = data?.events || [];
+    const focus = data?.focus || [];
+    
+    const combined = [
+      ...events.map(event => ({ ...event, type: 'event' })),
+      ...focus.map(focusItem => ({ ...focusItem, type: 'focus' }))
   ];
   
-  // Sort by date
   const sortedEvents = combined.sort((a, b) => new Date(b.date) - new Date(a.date));
   
-  // Get the most recent item
   const last = sortedEvents.length > 0 ? sortedEvents[0] : null;
   
   console.log("Le dernier événement ou focus est :", last || "Aucun événement disponible");
@@ -137,9 +131,9 @@ const Page = () => {
   <div className="col presta">
     <h3>Notre dernière prestation</h3>
     <EventCard
-      imageSrc={last?.cover || "default-image.jpg"} // Ajout de valeur par défaut pour imageSrc
-      title={last?.title || "Titre par défaut"} // Ajout de valeur par défaut pour title
-      date={last?.date ? new Date(last.date) : new Date()} // Utilisation de la date actuelle si last.date est undefined
+      imageSrc={last?.cover || "default-image.jpg"}
+      title={last?.title || "Titre par défaut"}
+      date={last?.date ? new Date(last.date) : new Date()}
       small
       label="boom"
     />
