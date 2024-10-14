@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import PropTypes, { any } from "prop-types";
+import PropTypes from "prop-types";
 import Field, { FIELD_TYPES } from "../../components/Field";
 import Select from "../../components/Select";
 import Button, { BUTTON_TYPES } from "../../components/Button";
