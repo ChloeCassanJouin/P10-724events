@@ -66,7 +66,7 @@ describe("When a page is created", () => {
     render(<Home />);
   
     const footer = document.querySelector("footer");
-    const eventCardFooter = within(footer).getByText("boom"); 
+    const eventCardFooter = within(footer).getByText("Notre dernière prestation"); 
   
     expect(eventCardFooter).toBeInTheDocument();
   });
