@@ -7,7 +7,7 @@ const Slider = () => {
   const { data } = useData();
   const [index, setIndex] = useState(0);
 
-  const byDateDesc = data?.focus.sort((evtA, evtB) => new Date(evtB.date) - new Date(evtA.date)) || [];
+  const byDateDesc = data?.events.sort((evtA, evtB) => new Date(evtB.date) - new Date(evtA.date)) || [];
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -22,7 +22,7 @@ const Slider = () => {
       {byDateDesc.length > 0 ? (
         byDateDesc.map((event, idx) => (
           <div
-            key={event.id} 
+            key={event.id || `event-${idx}`} // Fallback pour les clés
             className={`SlideCard ${index === idx ? "SlideCard--display" : "SlideCard--hide"}`}
           >
             <img src={event.cover} alt={event.title} />
@@ -43,7 +43,7 @@ const Slider = () => {
         <div className="SlideCard__pagination">
           {byDateDesc.map((event, radioIdx) => (
             <input
-              key={event.id} 
+            key={event.id || `radio-${radioIdx}`} // Fallback pour les clés
               type="radio"
               name="radio-button"
               checked={index === radioIdx}
